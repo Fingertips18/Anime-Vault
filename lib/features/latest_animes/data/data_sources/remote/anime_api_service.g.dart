@@ -32,35 +32,30 @@ class _AnimeApiService implements AnimeApiService {
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<HttpResponse<List<AnimeModel>>>(Options(
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<List<dynamic>>(_setStreamType<HttpResponse<List<AnimeModel>>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/animes',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    var value = _result.data!
-        .map((dynamic i) => AnimeModel.fromJson(i as Map<String, dynamic>))
-        .toList();
+        .compose(
+          _dio.options,
+          '/animes',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
+    var value = _result.data!.map((dynamic i) => AnimeModel.fromJson(i as Map<String, dynamic>)).toList();
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
-    if (T != dynamic &&
-        !(requestOptions.responseType == ResponseType.bytes ||
-            requestOptions.responseType == ResponseType.stream)) {
+    if (T != dynamic && !(requestOptions.responseType == ResponseType.bytes || requestOptions.responseType == ResponseType.stream)) {
       if (T == String) {
         requestOptions.responseType = ResponseType.plain;
       } else {
