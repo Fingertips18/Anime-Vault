@@ -1,8 +1,12 @@
-import "package:flutter/material.dart";
 import "package:flutter_dotenv/flutter_dotenv.dart";
+import "package:flutter/material.dart";
 
-Future main() async {
+import "package:anime_vault/injection.dart";
+
+Future<void> main() async {
   await dotenv.load(fileName: ".env");
+
+  await initializeDependencies();
 
   runApp(const AnimeVault());
 }
