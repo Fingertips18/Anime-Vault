@@ -7,3 +7,11 @@ abstract class RemoteAnimeEvent extends RemoteEvent {
 class GetAnimes extends RemoteAnimeEvent {
   const GetAnimes();
 }
+
+class RefreshAnimes extends RemoteAnimeEvent {
+  const RefreshAnimes();
+}
+
+class ScrollAnimes extends RemoteAnimeEvent {
+  const ScrollAnimes();
+}

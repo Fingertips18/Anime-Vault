@@ -5,7 +5,7 @@ class AnimeEntity extends Equatable {
   final String? name;
   final String? image;
   final String? kind;
-  final double? score;
+  final String? score;
   final String? status;
   final int? episodes;
 

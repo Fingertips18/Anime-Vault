@@ -14,9 +14,9 @@ class AnimeRepositoryImpl implements AnimeRepository {
   const AnimeRepositoryImpl(this._animeApiService);
 
   @override
-  Future<DataState<List<AnimeModel>>> getAnimes() async {
+  Future<DataState<List<AnimeModel>>> getAnimes(int page) async {
     try {
-      final httpResponse = await _animeApiService.getAnimes(page: 1, limit: 8, order: Order.popularity.toText);
+      final httpResponse = await _animeApiService.getAnimes(page: page, limit: 8, order: Order.popularity.toText);
 
       if (httpResponse.response.statusCode == HttpStatus.ok) {
         return DataSuccess(httpResponse.data);

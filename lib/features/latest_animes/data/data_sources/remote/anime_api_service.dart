@@ -8,7 +8,7 @@ part "anime_api_service.g.dart";
 
 @RestApi()
 abstract class AnimeApiService {
-  factory AnimeApiService(Dio dio) => _AnimeApiService(dio, baseUrl: Environment.animeBaseUrl);
+  factory AnimeApiService(Dio dio) => _AnimeApiService(dio, baseUrl: Environment.shikimoriApiUrl);
 
   @GET("/animes")
   Future<HttpResponse<List<AnimeModel>>> getAnimes({

@@ -27,9 +27,6 @@ dependencies:
   #date format
   intl: ^0.19.0
 
-  #store data locally
-  floor: ^1.4.2
-
   #request to api
   retrofit: ^4.0.3
 
@@ -45,6 +42,9 @@ dependencies:
   #http networking
   dio: ^5.4.0
 
+  #svg
+  flutter_svg: ^2.0.9
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -53,14 +53,16 @@ dev_dependencies:
 
   retrofit_generator: ^8.0.6
 
-  floor_generator: ^1.4.2
-
   build_runner: ^2.4.8
+
+  flutter_gen_runner: ^5.4.0
 
 flutter:
   uses-material-design: true
 
   assets:
+    - assets/images/
+    - assets/icons/
     - .env
 
   fonts:

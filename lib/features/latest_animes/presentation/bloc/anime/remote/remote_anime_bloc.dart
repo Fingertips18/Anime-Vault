@@ -12,13 +12,45 @@ class RemoteAnimeBloc extends RemoteBloc {
 
   RemoteAnimeBloc(this._getAnimesUsecase) : super(const RemoteAnimesLoading()) {
     on<GetAnimes>(onGetAnimes);
+    on<RefreshAnimes>(onRefreshAnimes);
+    on<ScrollAnimes>(onScrollAnimes);
   }
 
   void onGetAnimes(GetAnimes event, Emitter<RemoteState> emit) async {
     final dataState = await _getAnimesUsecase();
 
     if (dataState is DataSuccess && dataState.data!.isNotEmpty) {
-      emit(RemoteAnimesDone(dataState.data!));
+      emit(RemoteAnimesSuccess(animes: dataState.data!));
+    } else {
+      emit(RemoteAnimeError(dataState.exception!));
+    }
+  }
+
+  void onRefreshAnimes(RefreshAnimes event, Emitter<RemoteState> emit) async {
+    emit(const RemoteAnimesLoading());
+
+    final dataState = await _getAnimesUsecase();
+
+    if (dataState is DataSuccess && dataState.data!.isNotEmpty) {
+      emit(RemoteAnimesSuccess(animes: dataState.data!));
+    } else {
+      emit(RemoteAnimeError(dataState.exception!));
+    }
+  }
+
+  void onScrollAnimes(ScrollAnimes event, Emitter<RemoteState> emit) async {
+    var page = (state as RemoteAnimeState).page + 1;
+
+    final dataState = await _getAnimesUsecase(params: page);
+
+    if (dataState is DataSuccess && dataState.data!.isNotEmpty) {
+      emit(
+        RemoteAnimesSuccess(
+          animes: [...(state as RemoteAnimeState).animes!, ...dataState.data!],
+          page: page,
+          hasMore: dataState.data!.isNotEmpty,
+        ),
+      );
     } else {
       emit(RemoteAnimeError(dataState.exception!));
     }
