@@ -2,7 +2,7 @@ import "package:flutter_dotenv/flutter_dotenv.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter/material.dart";
 
-import "package:anime_vault/features/latest_animes/presentation/bloc/anime/remote/remote_anime_event.dart";
+import "package:anime_vault/features/latest_animes/presentation/bloc/anime/remote/remote_anime_bloc.dart";
 import "package:anime_vault/features/latest_animes/presentation/pages/latest_animes_page.dart";
 import "package:anime_vault/core/state_management/bloc/remote/remote_bloc.dart";
 import "package:anime_vault/config/themes/app_themes.dart";
@@ -23,7 +23,7 @@ class AnimeVault extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<RemoteBloc>(create: (context) => sl()..add(const GetAnimes())),
+        BlocProvider<RemoteBloc>(create: (context) => sl()..add(const RemoteAnimeEvent.getAnimes())),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -1,7 +1,13 @@
+import "package:freezed_annotation/freezed_annotation.dart";
+
 import 'package:anime_vault/features/latest_animes/domain/entities/anime_entity.dart';
 
-class AnimeModel extends AnimeEntity {
-  const AnimeModel({
+part "anime_model.freezed.dart";
+part "anime_model.g.dart";
+
+@freezed
+class AnimeModel extends AnimeEntity with _$AnimeModel {
+  const factory AnimeModel({
     int? id,
     String? name,
     String? image,
@@ -9,25 +15,7 @@ class AnimeModel extends AnimeEntity {
     String? score,
     String? status,
     int? episodes,
-  }) : super(
-          id: id,
-          name: name,
-          image: image,
-          kind: kind,
-          score: score,
-          status: status,
-          episodes: episodes,
-        );
+  }) = _AnimeModel;
 
-  factory AnimeModel.fromJson(Map<String, dynamic> json) {
-    return AnimeModel(
-      id: json["id"] ?? 0,
-      name: json["name"] ?? "",
-      image: json["image"]["original"] ?? "",
-      kind: json["kind"] ?? "",
-      score: json["score"] ?? "",
-      status: json["status"] ?? "",
-      episodes: json["episodes"] ?? 0,
-    );
-  }
+  factory AnimeModel.fromJson(Map<String, dynamic> json) => _$AnimeModelFromJson(json);
 }

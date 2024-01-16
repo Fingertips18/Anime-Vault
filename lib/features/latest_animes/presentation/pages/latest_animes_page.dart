@@ -1,11 +1,10 @@
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter/material.dart";
 
-import "package:anime_vault/features/latest_animes/presentation/bloc/anime/remote/remote_anime_state.dart";
+import "package:anime_vault/features/latest_animes/presentation/bloc/anime/remote/remote_anime_bloc.dart";
 import "package:anime_vault/features/latest_animes/presentation/widgets/blur_background.dart";
 import 'package:anime_vault/features/latest_animes/presentation/widgets/anime_builder.dart';
 import "package:anime_vault/features/latest_animes/presentation/widgets/spinner.dart";
-import "package:anime_vault/core/state_management/bloc/remote/remote_state.dart";
 import "package:anime_vault/core/state_management/bloc/remote/remote_bloc.dart";
 import 'package:anime_vault/core/widgets/custom_app_bar.dart';
 import "package:anime_vault/core/gen/assets.gen.dart";
@@ -37,7 +36,7 @@ class LatestAnimesPage extends StatelessWidget {
                   if (state is RemoteAnimesLoading) {
                     return const Center(child: Spinner());
                   } else if (state is RemoteAnimesSuccess) {
-                    return AnimeBuilder(animes: state.animes!);
+                    return AnimeBuilder(animes: state.animes!, hasMore: state.hasMore);
                   } else {
                     return const Center(child: Icon(Icons.refresh, color: Colors.white, size: 30));
                   }

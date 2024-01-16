@@ -1,17 +1,8 @@
-import 'package:anime_vault/core/state_management/bloc/remote/remote_event.dart';
+part of "remote_anime_bloc.dart";
 
-abstract class RemoteAnimeEvent extends RemoteEvent {
-  const RemoteAnimeEvent();
-}
-
-class GetAnimes extends RemoteAnimeEvent {
-  const GetAnimes();
-}
-
-class RefreshAnimes extends RemoteAnimeEvent {
-  const RefreshAnimes();
-}
-
-class ScrollAnimes extends RemoteAnimeEvent {
-  const ScrollAnimes();
+@freezed
+class RemoteAnimeEvent extends RemoteEvent with _$RemoteAnimeEvent {
+  const factory RemoteAnimeEvent.getAnimes() = GetAnimes;
+  const factory RemoteAnimeEvent.refreshAnimes() = RefreshAnimes;
+  const factory RemoteAnimeEvent.scrollAnimes() = ScrollAnimes;
 }

@@ -1,6 +1,4 @@
-import "package:equatable/equatable.dart";
-
-class AnimeEntity extends Equatable {
+class AnimeEntity {
   final int? id;
   final String? name;
   final String? image;
@@ -18,15 +16,4 @@ class AnimeEntity extends Equatable {
     this.status,
     this.episodes,
   });
-
-  @override
-  List<Object?> get props => [
-        id,
-        name,
-        image,
-        kind,
-        score,
-        status,
-        episodes,
-      ];
 }

@@ -1,17 +1,19 @@
-import "package:anime_vault/features/latest_animes/presentation/widgets/anime_card.dart";
-import "package:anime_vault/features/latest_animes/presentation/widgets/spinner.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter/material.dart";
 
-import "package:anime_vault/features/latest_animes/presentation/bloc/anime/remote/remote_anime_event.dart";
+import "package:anime_vault/features/latest_animes/presentation/bloc/anime/remote/remote_anime_bloc.dart";
+import "package:anime_vault/features/latest_animes/presentation/widgets/anime_card.dart";
+import "package:anime_vault/features/latest_animes/presentation/widgets/spinner.dart";
 import "package:anime_vault/features/latest_animes/domain/entities/anime_entity.dart";
 import "package:anime_vault/core/state_management/bloc/remote/remote_bloc.dart";
-import "package:flutter_bloc/flutter_bloc.dart";
 
 class AnimeBuilder extends StatefulWidget {
   final List<AnimeEntity> animes;
+  final bool hasMore;
   const AnimeBuilder({
     super.key,
     required this.animes,
+    required this.hasMore,
   });
 
   @override
@@ -27,7 +29,7 @@ class _AnimeBuilderState extends State<AnimeBuilder> {
 
     controller.addListener(() {
       if (controller.position.maxScrollExtent == controller.offset) {
-        context.read<RemoteBloc>().add(const ScrollAnimes());
+        context.read<RemoteBloc>().add(const RemoteAnimeEvent.scrollAnimes());
       }
     });
   }
@@ -39,7 +41,7 @@ class _AnimeBuilderState extends State<AnimeBuilder> {
   }
 
   Future refresh(BuildContext context) async {
-    context.read<RemoteBloc>().add(const RefreshAnimes());
+    context.read<RemoteBloc>().add(const RemoteAnimeEvent.refreshAnimes());
   }
 
   @override
@@ -63,8 +65,13 @@ class _AnimeBuilderState extends State<AnimeBuilder> {
           if (index < widget.animes.length) {
             return AnimeCard(animeEntity: widget.animes[index]);
           } else {
-            return const Center(
-              child: Spinner(),
+            return Center(
+              child: widget.hasMore
+                  ? const Spinner()
+                  : Text(
+                      "No more animes to show",
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Colors.white),
+                    ),
             );
           }
         },

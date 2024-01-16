@@ -1,5 +1,5 @@
-import 'package:equatable/equatable.dart';
+part of "remote_bloc.dart";
 
-abstract class RemoteState extends Equatable {
+abstract class RemoteState {
   const RemoteState();
 }
