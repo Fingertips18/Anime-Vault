@@ -30,11 +30,12 @@ TextTheme textTheme() {
     ),
     titleSmall: TextStyle(
       color: Colors.white,
-      fontSize: 18,
+      fontSize: 16,
+      fontWeight: FontWeight.w500,
     ),
     bodySmall: TextStyle(
       color: Colors.white70,
-      fontSize: 12,
+      fontSize: 10,
     ),
   );
 }

@@ -15,8 +15,11 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_spinner.svg
   String get icSpinner => 'assets/icons/ic_spinner.svg';
 
+  /// File path: assets/icons/ic_star.svg
+  String get icStar => 'assets/icons/ic_star.svg';
+
   /// List of all assets
-  List<String> get values => [icSpinner];
+  List<String> get values => [icSpinner, icStar];
 }
 
 class $AssetsImagesGen {
