@@ -8,7 +8,7 @@ A cross-platform mobile app where all of the most popular animes on https://shik
   • Download
 
 # What I learned
-  • Flutter state management
+  • Flutter state management (Bloc and freezed)
   • Flutter clean architecture
   • Core Data (Entities, Models, Properites)
   • Fetch data using Retrofit
